@@ -21,7 +21,7 @@ public class ServerSide extends JFrame{
 		//Maximize JFrame to be full screen
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		//
-		setResizable(false);
+		//setResizable(false);
 		
 		Container c = new Container();
 		c.setLayout(null);
@@ -64,15 +64,15 @@ public class ServerSide extends JFrame{
 		
 		JPanel right = new JPanel();
 		//JPanel right Set Size
-		right.setSize(648,644);
+		right.setSize(getWidth()/2, (int)(getHeight()*0.75));
 		//JPanel right Set Location
-		right.setLocation(689,99);
+		right.setLocation((getWidth()/2) + 1, (int)(getHeight()*0.25) + 1);
 		//JPanel right set Border to Border Black
 		right.setBorder(black);
 		//add right to container c
 		c.add(right);
 		
 		
-		getContentPane().add(c);
+		add(c);
 	}
 }
