@@ -12,6 +12,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 
@@ -19,10 +21,10 @@ public class ServerSide extends JFrame{
 	ServerSide(){
 		//Set JFrame to be Visible
 		setVisible(true);
-		//Maximize JFrame to be full screen
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//frame set size
+		setSize(1300, 1300);
 		//
-		//setResizable(false);
+		setTitle("Server Side");
 		
 		Container c = new Container();
 		c.setLayout(null);
@@ -45,18 +47,28 @@ public class ServerSide extends JFrame{
 		//Add Label to Container C
 		c.add(action);
 		
-		JPanel left = new JPanel();
-		//JPanel Left set Border to Border Black
-		left.setBorder(black);
-		//add Left to container c
-		c.add(left);
-		
 		
 		JPanel right = new JPanel();
 		//JPanel right set Border to Border Black
 		right.setBorder(black);
 		//add right to container c
 		c.add(right);
+		
+		//Declaring text area for scroll pane
+		JTextArea logTextArea = new JTextArea();
+		//
+		logTextArea.setBorder(black);
+		//Set Background to match Frame Background
+		logTextArea.setBackground(getBackground());
+		//
+		logTextArea.setEditable(false);
+		
+		//Declare JScrollPane logField
+		JScrollPane logField = new JScrollPane(logTextArea);
+		//
+		logField.setVisible(true);
+		//
+		c.add(logField);
 		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
@@ -73,9 +85,9 @@ public class ServerSide extends JFrame{
 				action.setSize(getWidth()/2, (int)(getHeight()*0.10));
 					//Left
 				//JPanel left Set Size
-				left.setSize(getWidth()/2, (int)(getHeight()*0.90));
+				logField.setSize(getWidth()/2, (int)(getHeight()*0.90));
 				//JPanel Left Set Location
-				left.setLocation(0, (int)(getHeight()*0.10));
+				logField.setLocation(0, (int)(getHeight()*0.10));
 					//Right
 				//JPanel right Set Size
 				right.setSize(getWidth()/2, (int)(getHeight()*0.90));
@@ -87,7 +99,8 @@ public class ServerSide extends JFrame{
 		
 		add(c);
 		pack();
-		//frame set size
-		setSize(1300, 1300);
+		//Maximize JFrame to be full screen
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		
 	}
 }
