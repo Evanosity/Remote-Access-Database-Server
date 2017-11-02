@@ -30,8 +30,8 @@ public class ServerSide extends JFrame{
 		c.setLayout(null);
 		
 		//Log title
-		JLabel log = new JLabel("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
-		log.setHorizontalAlignment(SwingConstants.CENTER);
+		JTextArea log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
+		log.setBackground(getBackground());
 		//Set Border
 		Border black = BorderFactory.createLineBorder(Color.BLACK, 1);
 		log.setBorder(black);
