@@ -17,13 +17,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class ServerSide extends JFrame{
 	
-	private JButton registerUser = new JButton();
-	private JButton shutdown = new JButton();
-	private JButton lockAll = new JButton();
+	private JButton registerUser;
+	private JButton shutdown;
+	private JButton lockAll;
 	private JButton registry;
 	private JTextArea log;
 	private JLabel action;
@@ -32,32 +33,46 @@ public class ServerSide extends JFrame{
 	private JScrollPane logField;
 	
 	ServerSide(){
-		registry=new JButton("test");
+		registerUser = new JButton("Why");
+		shutdown = new JButton("Won't");
+		lockAll = new JButton("This");
+		registry=new JButton("Work");
+		
 		//Set JFrame to be Visible
 		setVisible(true);
 		//frame set size
 		setSize(1300, 1300);
-		//
+		//This sets the title of the JFrame
 		setTitle("Server Side");
 		
+		
+		//Adds and implements a container named "c"
 		Container c = new Container();
+		//Sets the layout to null
 		c.setLayout(null);
 		
 		//Log title
 		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
+		//Set Log Size
+		//Set Background of Component log
 		log.setBackground(getBackground());
 		//Set Border
 		Border black = BorderFactory.createLineBorder(Color.BLACK, 1);
 		log.setBorder(black);
+		//
+		log.setVisible(true);
 		//Add Label to Container C
 		c.add(log);
 		
 		
 		//Log title
 		action = new JLabel("Action" );
+		//Set the text Alignment for the text horizontally to be in the center
 		action.setHorizontalAlignment(SwingConstants.CENTER);
 		//Set Border
 		action.setBorder(black);
+		//Set the component action to be visible
+		action.setVisible(true);
 		//Add Label to Container C
 		c.add(action);
 		
@@ -65,38 +80,60 @@ public class ServerSide extends JFrame{
 		right = new JPanel();
 		//JPanel right set Border to Border Black
 		right.setBorder(black);
+		//Set component right to be visible
+		right.setVisible(true);
 		//add right to container c
 		c.add(right);
 		
+		
 		//Declaring text area for scroll pane
 		logTextArea = new JTextArea();
-		//
+		//Set border of component logTextArea to be the boreder "black"
 		logTextArea.setBorder(black);
 		//Set Background to match Frame Background
 		logTextArea.setBackground(getBackground());
-		//
+		//Set editable to false
 		logTextArea.setEditable(false);
 		
+		
 		//Declare JScrollPane logField
-		logField = new JScrollPane(logTextArea);
-		//
+		logField = new JScrollPane(logTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//Set component log field to be visible
 		logField.setVisible(true);
-		//
+		//add log field to container c
 		c.add(logField);
 		
 		
+		//Sets button "registerUser" to be visible
 		registerUser.setVisible(true);
+		//Add button "registerUser" to container "c"
 		c.add(registerUser);
+
 		
+		//Set button "shutdown" to be visible
 		shutdown.setVisible(true);
+		//Add button "shutdown" to container "c"
 		c.add(shutdown);
 		
+		
+		//Set button "lockAll" to be visible
 		lockAll.setVisible(true);
+		//Add button "lockAll" to container "c"
 		c.add(lockAll);
 		
+		
+		//Set button "registry" to be visible
 		registry.setVisible(true);
+		//Add button "registry" to container "c"
 		c.add(registry);
 		
+		/**
+		 * This component listener listens for when the JFrame is resized
+		 * Once it detects the action of being resized it will set the size
+		 * of all components according to a ratio using the screen size
+		 * this insures no matter the screen size all components should be 
+		 * located properly
+		 */
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
@@ -121,25 +158,37 @@ public class ServerSide extends JFrame{
 				//JPanel right Set Location
 				right.setLocation((getWidth()/2), (int)(getHeight()*0.10));
 					//Register User
-				// (w,h)
+				////Register User set size 
 				registerUser.setSize(200,75);
-				// (x,y)
+				// //Register User set location 
 				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+100);
 					//Shutdown
+				//Shutdown set size 
 				shutdown.setSize(200,75);
+				//Shutdown set location 
 				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+200);
 					//Lock All
+				//Lock all set size 
 				lockAll.setSize(200,75);
+				//Lock all set location
 				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
 					//Registry
+				//Registry set size 
 				registry.setSize(200,75);
+				//Registry set location
 				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
 				
 			}
 		});
 		
 		
-		add(c);
+		//Adds container "c" to JFrame "ServerSide"
+		getContentPane().add(c);
+		/**
+		 * Shrinks JFrame to smallest possible size
+		 * This is to fix a bug that a component won't
+		 * show up until the frame is resized
+		 */
 		pack();
 		//Maximize JFrame to be full screen
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
