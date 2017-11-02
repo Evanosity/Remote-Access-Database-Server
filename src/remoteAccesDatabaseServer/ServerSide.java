@@ -5,8 +5,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+//import java.awt.event.FocusEvent;
+//import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,14 +18,21 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class ServerSide extends JFrame{
 	
 	private JButton registerUser = new JButton();
 	private JButton shutdown = new JButton();
 	private JButton lockAll = new JButton();
-	private JButton registry = new JButton();
+	private JButton registry;
+	private JTextArea log;
+	private JLabel action;
+	private JPanel right;
+	private JTextArea logTextArea;
+	private JScrollPane logField;
 	
 	ServerSide(){
+		registry=new JButton("test");
 		//Set JFrame to be Visible
 		setVisible(true);
 		//frame set size
@@ -37,7 +44,7 @@ public class ServerSide extends JFrame{
 		c.setLayout(null);
 		
 		//Log title
-		JTextArea log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
+		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
 		log.setBackground(getBackground());
 		//Set Border
 		Border black = BorderFactory.createLineBorder(Color.BLACK, 1);
@@ -47,7 +54,7 @@ public class ServerSide extends JFrame{
 		
 		
 		//Log title
-		JLabel action = new JLabel("Action" );
+		action = new JLabel("Action" );
 		action.setHorizontalAlignment(SwingConstants.CENTER);
 		//Set Border
 		action.setBorder(black);
@@ -55,14 +62,14 @@ public class ServerSide extends JFrame{
 		c.add(action);
 		
 		
-		JPanel right = new JPanel();
+		right = new JPanel();
 		//JPanel right set Border to Border Black
 		right.setBorder(black);
 		//add right to container c
 		c.add(right);
 		
 		//Declaring text area for scroll pane
-		JTextArea logTextArea = new JTextArea();
+		logTextArea = new JTextArea();
 		//
 		logTextArea.setBorder(black);
 		//Set Background to match Frame Background
@@ -71,7 +78,7 @@ public class ServerSide extends JFrame{
 		logTextArea.setEditable(false);
 		
 		//Declare JScrollPane logField
-		JScrollPane logField = new JScrollPane(logTextArea);
+		logField = new JScrollPane(logTextArea);
 		//
 		logField.setVisible(true);
 		//

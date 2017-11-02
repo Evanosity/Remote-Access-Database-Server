@@ -1,6 +1,8 @@
 package remoteAccesDatabaseServer;
 
-public class Main {
+import javax.swing.JFrame;
+
+public class Main {	
 	public static void main(String[] args){
 		ServerSide ss = new ServerSide();
 	}
