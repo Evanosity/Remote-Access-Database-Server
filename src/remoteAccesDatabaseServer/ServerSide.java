@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +19,12 @@ import javax.swing.border.Border;
 import javax.swing.SwingConstants;
 
 public class ServerSide extends JFrame{
+	
+	private JButton registerUser = new JButton();
+	private JButton shutdown = new JButton();
+	private JButton lockAll = new JButton();
+	private JButton registry = new JButton();
+	
 	ServerSide(){
 		//Set JFrame to be Visible
 		setVisible(true);
@@ -70,6 +77,19 @@ public class ServerSide extends JFrame{
 		//
 		c.add(logField);
 		
+		
+		registerUser.setVisible(true);
+		c.add(registerUser);
+		
+		shutdown.setVisible(true);
+		c.add(shutdown);
+		
+		lockAll.setVisible(true);
+		c.add(lockAll);
+		
+		registry.setVisible(true);
+		c.add(registry);
+		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
@@ -93,6 +113,21 @@ public class ServerSide extends JFrame{
 				right.setSize(getWidth()/2, (int)(getHeight()*0.90));
 				//JPanel right Set Location
 				right.setLocation((getWidth()/2), (int)(getHeight()*0.10));
+					//Register User
+				// (w,h)
+				registerUser.setSize(200,75);
+				// (x,y)
+				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+100);
+					//Shutdown
+				shutdown.setSize(200,75);
+				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+200);
+					//Lock All
+				lockAll.setSize(200,75);
+				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
+					//Registry
+				registry.setSize(200,75);
+				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
+				
 			}
 		});
 		
