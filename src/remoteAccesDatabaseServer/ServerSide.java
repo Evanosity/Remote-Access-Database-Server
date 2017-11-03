@@ -33,10 +33,10 @@ public class ServerSide extends JFrame{
 	private JScrollPane logField;
 	
 	ServerSide(){
-		registerUser = new JButton("Why");
-		shutdown = new JButton("Won't");
-		lockAll = new JButton("This");
-		registry=new JButton("Work");
+		registerUser = new JButton("Register User");
+		shutdown = new JButton("Shutdown");
+		lockAll = new JButton("Lock All USers");
+		registry=new JButton("User Registry");
 		
 		//Set JFrame to be Visible
 		setVisible(true);
@@ -107,7 +107,7 @@ public class ServerSide extends JFrame{
 		//Sets button "registerUser" to be visible
 		registerUser.setVisible(true);
 		//Add button "registerUser" to container "c"
-		c.add(registerUser);
+		right.add(registerUser);
 
 		
 		//Set button "shutdown" to be visible
@@ -161,25 +161,32 @@ public class ServerSide extends JFrame{
 				////Register User set size 
 				registerUser.setSize(200,75);
 				// //Register User set location 
-				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+100);
+				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.15));
 					//Shutdown
 				//Shutdown set size 
 				shutdown.setSize(200,75);
 				//Shutdown set location 
-				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+200);
+				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.35));
 					//Lock All
 				//Lock all set size 
 				lockAll.setSize(200,75);
 				//Lock all set location
-				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
+				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.55));
 					//Registry
 				//Registry set size 
 				registry.setSize(200,75);
 				//Registry set location
-				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.5),(int)(getHeight()*.10)+300);
+				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.75));
 				
 			}
 		});
+		
+		
+		c.setComponentZOrder(right, 0);
+		c.setComponentZOrder(registerUser, 1);
+		c.setComponentZOrder(shutdown,1);
+		c.setComponentZOrder(lockAll,1);
+		c.setComponentZOrder(registry,1);
 		
 		
 		//Adds container "c" to JFrame "ServerSide"
@@ -192,6 +199,5 @@ public class ServerSide extends JFrame{
 		pack();
 		//Maximize JFrame to be full screen
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		
 	}
 }
