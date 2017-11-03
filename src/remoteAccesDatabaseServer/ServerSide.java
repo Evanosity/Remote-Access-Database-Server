@@ -107,7 +107,7 @@ public class ServerSide extends JFrame{
 		//Sets button "registerUser" to be visible
 		registerUser.setVisible(true);
 		//Add button "registerUser" to container "c"
-		right.add(registerUser);
+		c.add(registerUser);
 
 		
 		//Set button "shutdown" to be visible
