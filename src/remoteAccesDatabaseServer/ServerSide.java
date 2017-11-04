@@ -1,12 +1,9 @@
 package remoteAccesDatabaseServer;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-//import java.awt.event.FocusEvent;
-//import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,117 +12,99 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
 import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
+import javax.swing.border.Border;
+
+import com.sun.xml.internal.ws.api.Component;
 
 @SuppressWarnings("serial")
 public class ServerSide extends JFrame{
 	
+	//Declaring Components
 	private JButton registerUser;
 	private JButton shutdown;
 	private JButton lockAll;
 	private JButton registry;
 	private JTextArea log;
+	private JTextArea logTextArea;
 	private JLabel action;
 	private JPanel right;
-	private JTextArea logTextArea;
 	private JScrollPane logField;
 	
 	ServerSide(){
-		registerUser = new JButton("Register User");
-		shutdown = new JButton("Shutdown");
-		lockAll = new JButton("Lock All USers");
-		registry=new JButton("User Registry");
 		
-		//Set JFrame to be Visible
+		//JFrame Details
 		setVisible(true);
-		//frame set size
 		setSize(1300, 1300);
-		//This sets the title of the JFrame
 		setTitle("Server Side");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
-		//Adds and implements a container named "c"
+		//Container "c"
 		Container c = new Container();
-		//Sets the layout to null
 		c.setLayout(null);
 		
-		//Log title
-		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
-		//Set Log Size
-		//Set Background of Component log
-		log.setBackground(getBackground());
-		//Set Border
+		//Border Black
 		Border black = BorderFactory.createLineBorder(Color.BLACK, 1);
+		
+		//Log Text Area
+		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
+		log.setBackground(getBackground());
 		log.setBorder(black);
-		//
 		log.setVisible(true);
-		//Add Label to Container C
 		c.add(log);
 		
 		
-		//Log title
+		//Action Label
 		action = new JLabel("Action" );
-		//Set the text Alignment for the text horizontally to be in the center
 		action.setHorizontalAlignment(SwingConstants.CENTER);
-		//Set Border
 		action.setBorder(black);
-		//Set the component action to be visible
 		action.setVisible(true);
-		//Add Label to Container C
 		c.add(action);
 		
 		
+		//Right Panel
 		right = new JPanel();
-		//JPanel right set Border to Border Black
 		right.setBorder(black);
-		//Set component right to be visible
 		right.setVisible(true);
-		//add right to container c
 		c.add(right);
 		
 		
-		//Declaring text area for scroll pane
+		//Log Text Area
 		logTextArea = new JTextArea();
-		//Set border of component logTextArea to be the boreder "black"
 		logTextArea.setBorder(black);
-		//Set Background to match Frame Background
 		logTextArea.setBackground(getBackground());
-		//Set editable to false
 		logTextArea.setEditable(false);
 		
 		
-		//Declare JScrollPane logField
+		//JScrollPane logField
 		logField = new JScrollPane(logTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//Set component log field to be visible
 		logField.setVisible(true);
-		//add log field to container c
 		c.add(logField);
 		
 		
-		//Sets button "registerUser" to be visible
+		//Register User Button
+		registerUser = new JButton("Register User");
 		registerUser.setVisible(true);
-		//Add button "registerUser" to container "c"
 		c.add(registerUser);
 
 		
-		//Set button "shutdown" to be visible
+		//Shutdown Button
+		shutdown = new JButton("Shutdown");
 		shutdown.setVisible(true);
-		//Add button "shutdown" to container "c"
 		c.add(shutdown);
 		
 		
-		//Set button "lockAll" to be visible
+		//Lock All Users Button
+		lockAll = new JButton("Lock All Users");
 		lockAll.setVisible(true);
-		//Add button "lockAll" to container "c"
 		c.add(lockAll);
 		
-		
-		//Set button "registry" to be visible
+		//Registry Button
+		registry=new JButton("User Registry");
 		registry.setVisible(true);
-		//Add button "registry" to container "c"
 		c.add(registry);
+		
 		
 		/**
 		 * This component listener listens for when the JFrame is resized
@@ -136,7 +115,6 @@ public class ServerSide extends JFrame{
 		 */
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
-				Component c = (Component)e.getSource();
 					//Log
 				//Label set location
 				log.setLocation(0, 0);
@@ -181,15 +159,15 @@ public class ServerSide extends JFrame{
 			}
 		});
 		
-		
-		c.setComponentZOrder(right, 0);
-		c.setComponentZOrder(registerUser, 1);
+		//Set Layer Components on container
+		c.setComponentZOrder(right, 4);
+		c.setComponentZOrder(registerUser,0);
 		c.setComponentZOrder(shutdown,1);
-		c.setComponentZOrder(lockAll,1);
-		c.setComponentZOrder(registry,1);
+		c.setComponentZOrder(lockAll,2);
+		c.setComponentZOrder(registry,3);
 		
 		
-		//Adds container "c" to JFrame "ServerSide"
+		
 		getContentPane().add(c);
 		/**
 		 * Shrinks JFrame to smallest possible size
@@ -197,7 +175,7 @@ public class ServerSide extends JFrame{
 		 * show up until the frame is resized
 		 */
 		pack();
-		//Maximize JFrame to be full screen
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		
 	}
 }
