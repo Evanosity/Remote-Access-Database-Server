@@ -168,7 +168,7 @@ public class ServerSide extends JFrame{
 		
 		
 		
-		getContentPane().add(c);
+		add(c);
 		/**
 		 * Shrinks JFrame to smallest possible size
 		 * This is to fix a bug that a component won't
