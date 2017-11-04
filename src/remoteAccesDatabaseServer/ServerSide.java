@@ -116,44 +116,28 @@ public class ServerSide extends JFrame{
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 					//Log
-				//Label set location
 				log.setLocation(0, 0);
-				//Label Set Size 	(w, h)
 				log.setSize(getWidth()/2, (int)(getHeight()*0.10));
 					//Action
-				//Label Set Bounds	 (x,y,w,h)
 				action.setLocation((getWidth()/2), 0);
-				//Action set size
 				action.setSize(getWidth()/2, (int)(getHeight()*0.10));
 					//Left
-				//JPanel left Set Size
 				logField.setSize(getWidth()/2, (int)(getHeight()*0.90));
-				//JPanel Left Set Location
 				logField.setLocation(0, (int)(getHeight()*0.10));
 					//Right
-				//JPanel right Set Size
 				right.setSize(getWidth()/2, (int)(getHeight()*0.90));
-				//JPanel right Set Location
 				right.setLocation((getWidth()/2), (int)(getHeight()*0.10));
 					//Register User
-				////Register User set size 
 				registerUser.setSize(200,75);
-				// //Register User set location 
 				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.15));
 					//Shutdown
-				//Shutdown set size 
 				shutdown.setSize(200,75);
-				//Shutdown set location 
 				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.35));
 					//Lock All
-				//Lock all set size 
 				lockAll.setSize(200,75);
-				//Lock all set location
 				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.55));
 					//Registry
-				//Registry set size 
 				registry.setSize(200,75);
-				//Registry set location
 				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.75));
 				
 			}
