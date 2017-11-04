@@ -143,6 +143,7 @@ public class ServerSide extends JFrame{
 			}
 		});
 		
+		
 		//Set Layer Components on container
 		c.setComponentZOrder(right, 4);
 		c.setComponentZOrder(registerUser,0);
