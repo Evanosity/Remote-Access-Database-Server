@@ -2,6 +2,8 @@ package remoteAccesDatabaseServer;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -20,7 +22,7 @@ import com.sun.xml.internal.ws.api.Component;
 @SuppressWarnings("serial")
 public class ServerSide extends JFrame{
 	
-	//Declaring Components
+	//Declaring Components (Main)
 	private JButton registerUser;
 	private JButton shutdown;
 	private JButton lockAll;
@@ -30,6 +32,8 @@ public class ServerSide extends JFrame{
 	private JLabel action;
 	private JPanel right;
 	private JScrollPane logField;
+	//(Registry)
+	public JButton exit;
 	
 	ServerSide(){
 		
@@ -104,6 +108,14 @@ public class ServerSide extends JFrame{
 		registry=new JButton("User Registry");
 		registry.setVisible(true);
 		c.add(registry);
+		registry.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				registryFrame();
+			}
+			
+		});
 		
 		
 		/**
@@ -163,4 +175,36 @@ public class ServerSide extends JFrame{
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
 	}
+	
+	void registryFrame(){
+		//New Frame Specs
+		JFrame registryF = new JFrame("Test");
+		registryF.setSize(330, 500);
+		registryF.setLocation(346, 103);
+		registryF.setResizable(false);
+		registryF.setVisible(true);
+		
+		//New Container
+		Container regC = new Container();
+		regC.setLayout(null);
+		registryF.add(regC);
+		
+		//Exit button
+		exit = new JButton("Exit");
+		exit.setSize(100, 50);
+		exit.setLocation(0, 0);
+		exit.setVisible(true);
+		exit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				registryF.dispose();
+			}
+			
+		});
+		regC.add(exit);
+		
+		
+	}
+	
 }
