@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
@@ -32,8 +33,18 @@ public class ServerSide extends JFrame{
 	private JLabel action;
 	private JPanel right;
 	private JScrollPane logField;
-	//(Registry)
+	//(Registry + Register User)
 	public JButton exit;
+	//(Registry)
+	//(Register User)
+	private JButton enter;
+	private JTextField name;
+	private JTextField company;
+	private JTextField adminPass;
+	private JLabel companyError;
+	private JLabel adminPassError;
+	
+	
 	
 	ServerSide(){
 		
@@ -91,6 +102,14 @@ public class ServerSide extends JFrame{
 		registerUser = new JButton("Register User");
 		registerUser.setVisible(true);
 		c.add(registerUser);
+		registerUser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				registerUser();
+			}
+			
+		});
 
 		
 		//Shutdown Button
@@ -178,7 +197,7 @@ public class ServerSide extends JFrame{
 	
 	void registryFrame(){
 		//New Frame Specs
-		JFrame registryF = new JFrame("Test");
+		JFrame registryF = new JFrame("Registry Frame");
 		registryF.setSize(330, 500);
 		registryF.setLocation(346, 103);
 		registryF.setResizable(false);
@@ -207,4 +226,71 @@ public class ServerSide extends JFrame{
 		
 	}
 	
+	
+	void registerUser() {
+		JFrame registerUserF = new JFrame("Register User");
+		registerUserF.setSize(500, 311);
+		registerUserF.setLocation(709, 125);
+		//registryF.setResizable(false);
+		registerUserF.setVisible(true);
+		
+		Container registerUserC = new Container();
+		registerUserC.setLayout(null);
+		registerUserF.add(registerUserC);
+		
+		exit = new JButton("Exit");
+		exit.setSize(100, 50);
+		exit.setLocation(0, 0);
+		exit.setVisible(true);
+		exit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				registerUserF.dispose();
+			}
+			
+		});
+		registerUserC.add(exit);
+		
+		enter = new JButton("Enter");
+		enter.setLocation(0,60);
+		enter.setSize(100,50);
+		enter.setVisible(true);
+		registerUserC.add(enter);
+		
+		
+		name = new JTextField();
+		name.setLocation(0,60);
+		name.setSize(200,50);
+		name.setVisible(true);
+		registerUserC.add(name);
+		
+		
+		company = new JTextField();
+		company.setLocation(0,180);
+		company.setSize(200,50);
+		company.setVisible(true);
+		registerUserC.add(company);
+		
+		
+		adminPass = new JTextField();
+		adminPass.setLocation(0, 300);
+		adminPass.setSize(200,50);
+		adminPass.setVisible(true);
+		registerUserC.add(adminPass);
+		
+		
+		companyError = new JLabel("This Company Does not exist");
+		companyError.setLocation(0,120);
+		companyError.setSize(200,50);
+		companyError.setVisible(true);
+		registerUserC.add(companyError);
+		
+		
+		adminPassError = new JLabel("This is not the right Admin password");
+		adminPassError.setLocation(0,240);
+		adminPassError.setSize(200,50);
+		adminPassError.setVisible(true);
+		registerUserC.add(adminPassError);
+	}
 }
