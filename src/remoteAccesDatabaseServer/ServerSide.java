@@ -2,6 +2,7 @@ package remoteAccesDatabaseServer;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -43,6 +44,9 @@ public class ServerSide extends JFrame{
 	private JTextField adminPass;
 	private JLabel companyError;
 	private JLabel adminPassError;
+	private JLabel nameTitle;
+	private JLabel companyTitle;
+	private JLabel adminPassTitle;
 	
 	
 	
@@ -191,7 +195,8 @@ public class ServerSide extends JFrame{
 		 * show up until the frame is resized
 		 */
 		pack();
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		pack();
 		
 	}
 	
@@ -229,68 +234,117 @@ public class ServerSide extends JFrame{
 	
 	void registerUser() {
 		JFrame registerUserF = new JFrame("Register User");
-		registerUserF.setSize(500, 311);
+		registerUserF.setSize(576, 335);
 		registerUserF.setLocation(709, 125);
 		//registryF.setResizable(false);
 		registerUserF.setVisible(true);
 		
 		Container registerUserC = new Container();
 		registerUserC.setLayout(null);
-		registerUserF.add(registerUserC);
+		registerUserF.getContentPane().add(registerUserC);
 		
 		exit = new JButton("Exit");
 		exit.setSize(100, 50);
-		exit.setLocation(0, 0);
+		exit.setLocation(424, 235);
 		exit.setVisible(true);
 		exit.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				registerUserF.dispose();
+				//System.out.println("Height: " + registerUserF.getHeight() + "\n Width: " + registerUserF.getWidth() + "\n X pos: " + registerUserF.getX() + "\n Y pos: " + registerUserF.getY());
 			}
 			
 		});
 		registerUserC.add(exit);
 		
 		enter = new JButton("Enter");
-		enter.setLocation(0,60);
+		enter.setLocation(288,235);
 		enter.setSize(100,50);
 		enter.setVisible(true);
+		enter.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(adminPassError.isVisible()) {
+					adminPassError.setVisible(false);
+					companyError.setVisible(false);
+				}
+				else{
+					adminPassError.setVisible(true);
+					companyError.setVisible(true);
+				}
+			}
+			
+		});
 		registerUserC.add(enter);
 		
 		
 		name = new JTextField();
-		name.setLocation(0,60);
-		name.setSize(200,50);
+		name.setLocation(10,29);
+		name.setSize(204,41);
 		name.setVisible(true);
 		registerUserC.add(name);
 		
 		
 		company = new JTextField();
-		company.setLocation(0,180);
-		company.setSize(200,50);
+		company.setLocation(10,125);
+		company.setSize(204,41);
 		company.setVisible(true);
 		registerUserC.add(company);
 		
 		
 		adminPass = new JTextField();
-		adminPass.setLocation(0, 300);
-		adminPass.setSize(200,50);
+		adminPass.setLocation(10, 220);
+		adminPass.setSize(204,41);
 		adminPass.setVisible(true);
 		registerUserC.add(adminPass);
 		
 		
 		companyError = new JLabel("This Company Does not exist");
-		companyError.setLocation(0,120);
-		companyError.setSize(200,50);
-		companyError.setVisible(true);
+		companyError.setForeground(Color.RED);
+		companyError.setLocation(10,166);
+		companyError.setSize(204,27);
+		companyError.setVisible(false);
 		registerUserC.add(companyError);
 		
 		
-		adminPassError = new JLabel("This is not the right Admin password");
-		adminPassError.setLocation(0,240);
-		adminPassError.setSize(200,50);
-		adminPassError.setVisible(true);
+		adminPassError = new JLabel("Incorrect Administrator Password"); 
+		adminPassError.setForeground(Color.RED);
+		adminPassError.setLocation(10,261);
+		adminPassError.setSize(204,27);
+		adminPassError.setVisible(false);
 		registerUserC.add(adminPassError);
+		
+		nameTitle = new JLabel();
+		nameTitle.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		nameTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		nameTitle.setText("Name");
+		nameTitle.setLocation(10,1);
+		nameTitle.setSize(204,27);
+		nameTitle.setVisible(true);
+		registerUserC.add(nameTitle);
+		
+		companyTitle = new JLabel();
+		companyTitle.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		companyTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		companyTitle.setText("Company");
+		companyTitle.setLocation(10,98);
+		companyTitle.setSize(204,27);
+		companyTitle.setVisible(true);
+		registerUserC.add(companyTitle);
+		
+		
+		adminPassTitle = new JLabel();
+		adminPassTitle.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		adminPassTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		adminPassTitle.setText("Administrator Password");
+		adminPassTitle.setLocation(10,193);
+		adminPassTitle.setSize(204,27);
+		adminPassTitle.setVisible(true);
+		registerUserC.add(adminPassTitle);
+		
+		registerUserF.pack();
+		registerUserF.setSize(576, 335);
 	}
 }
