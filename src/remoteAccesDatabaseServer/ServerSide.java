@@ -22,7 +22,7 @@ import javax.swing.border.Border;
 import com.sun.xml.internal.ws.api.Component;
 
 @SuppressWarnings("serial")
-public class ServerSide extends JFrame{
+public class ServerSide{
 	
 	//Declaring Components (Main)
 	private JButton registerUser;
@@ -51,12 +51,13 @@ public class ServerSide extends JFrame{
 	
 	
 	ServerSide(){
+		JFrame serverSide = new JFrame();
 		
 		//JFrame Details
-		setVisible(true);
-		setSize(1300, 1300);
-		setTitle("Server Side");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		serverSide.setVisible(true);
+		serverSide.setSize(1300, 1300);
+		serverSide.setTitle("Server Side");
+		serverSide.setDefaultCloseOperation(serverSide.EXIT_ON_CLOSE);
 		
 		
 		//Container "c"
@@ -68,7 +69,7 @@ public class ServerSide extends JFrame{
 		
 		//Log Text Area
 		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
-		log.setBackground(getBackground());
+		log.setBackground(serverSide.getBackground());
 		log.setBorder(black);
 		log.setVisible(true);
 		c.add(log);
@@ -92,7 +93,7 @@ public class ServerSide extends JFrame{
 		//Log Text Area
 		logTextArea = new JTextArea();
 		logTextArea.setBorder(black);
-		logTextArea.setBackground(getBackground());
+		logTextArea.setBackground(serverSide.getBackground());
 		logTextArea.setEditable(false);
 		
 		
@@ -148,32 +149,32 @@ public class ServerSide extends JFrame{
 		 * this insures no matter the screen size all components should be 
 		 * located properly
 		 */
-		getContentPane().addComponentListener(new ComponentAdapter() {
+		serverSide.getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 					//Log
 				log.setLocation(0, 0);
-				log.setSize(getWidth()/2, (int)(getHeight()*0.10));
+				log.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.10));
 					//Action
-				action.setLocation((getWidth()/2), 0);
-				action.setSize(getWidth()/2, (int)(getHeight()*0.10));
+				action.setLocation((serverSide.getWidth()/2), 0);
+				action.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.10));
 					//Left
-				logField.setSize(getWidth()/2, (int)(getHeight()*0.90));
-				logField.setLocation(0, (int)(getHeight()*0.10));
+				logField.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.90));
+				logField.setLocation(0, (int)(serverSide.getHeight()*0.10));
 					//Right
-				right.setSize(getWidth()/2, (int)(getHeight()*0.90));
-				right.setLocation((getWidth()/2), (int)(getHeight()*0.10));
+				right.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.90));
+				right.setLocation((serverSide.getWidth()/2), (int)(serverSide.getHeight()*0.10));
 					//Register User
 				registerUser.setSize(200,75);
-				registerUser.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.15));
+				registerUser.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.15));
 					//Shutdown
 				shutdown.setSize(200,75);
-				shutdown.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.35));
+				shutdown.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.35));
 					//Lock All
 				lockAll.setSize(200,75);
-				lockAll.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.55));
+				lockAll.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.55));
 					//Registry
 				registry.setSize(200,75);
-				registry.setLocation((getWidth()/2) + (int)(getWidth()*0.1),(int)(getHeight()*.75));
+				registry.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.75));
 				
 			}
 		});
@@ -188,15 +189,18 @@ public class ServerSide extends JFrame{
 		
 		
 		
-		add(c);
+		serverSide.add(c);
 		/**
 		 * Shrinks JFrame to smallest possible size
 		 * This is to fix a bug that a component won't
 		 * show up until the frame is resized
 		 */
-		pack();
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		pack();
+		
+		
+		serverSide.pack();
+		serverSide.setSize(1300, 1300);
+		serverSide.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		
 	}
 	
