@@ -120,6 +120,14 @@ public class ServerSide{
 		//Shutdown Button
 		shutdown = new JButton("Shutdown");
 		shutdown.setVisible(true);
+		shutdown.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				serverSide.dispose();
+			}
+			
+		});
 		c.add(shutdown);
 		
 		
