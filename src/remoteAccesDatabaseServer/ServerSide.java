@@ -37,6 +37,9 @@ public class ServerSide{
 	//(Registry + Register User)
 	public JButton exit;
 	//(Registry)
+	private JLabel nameLabel;
+	private JLabel companyLabel;
+	private JLabel account;
 	//(Register User)
 	private JButton enter;
 	private JTextField name;
@@ -213,22 +216,70 @@ public class ServerSide{
 	}
 	
 	void registryFrame(){
+		JPanel left = new JPanel();
+		JPanel middle = new JPanel();
+		JPanel right = new JPanel();
+		
 		//New Frame Specs
 		JFrame registryF = new JFrame("Registry Frame");
-		registryF.setSize(330, 500);
+		registryF.setSize(525, 630);
 		registryF.setLocation(346, 103);
 		registryF.setResizable(false);
 		registryF.setVisible(true);
 		
+		//Remove when you transfer
+		//registryF.setDefaultCloseOperation(registryF.EXIT_ON_CLOSE);
+		
+		//Border
+		Border black = BorderFactory.createLineBorder(Color.BLACK, 1);
+		
 		//New Container
 		Container regC = new Container();
 		regC.setLayout(null);
-		registryF.add(regC);
+		registryF.getContentPane().add(regC);
+		
+		left.setBorder(black);
+		left.setSize(175,516);
+		left.setLocation(0,25);
+		regC.add(left);
+		
+		middle.setBorder(black);
+		middle.setSize(175,516);
+		middle.setLocation(175,25);
+		regC.add(middle);
+		
+		right.setBorder(black);
+		right.setSize(169,516);
+		right.setLocation(350,25);
+		regC.add(right);
+				
+		
+		nameLabel = new JLabel("Name");
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		nameLabel.setSize(175,25);
+		nameLabel.setLocation(0,0);
+		nameLabel.setBorder(black);
+		regC.add(nameLabel);
+		
+		companyLabel = new JLabel("Company");
+		companyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		companyLabel.setSize(175,25);
+		companyLabel.setLocation(175, 0);
+		companyLabel.setBorder(black);
+		regC.add(companyLabel);
+		
+		account = new JLabel("Account Creation Date");
+		account.setHorizontalAlignment(SwingConstants.CENTER);
+		account.setSize(169,25);
+		account.setLocation(350, 0);
+		account.setBorder(black);
+		regC.add(account);
+		
 		
 		//Exit button
 		exit = new JButton("Exit");
 		exit.setSize(100, 50);
-		exit.setLocation(0, 0);
+		exit.setLocation(262, 540);
 		exit.setVisible(true);
 		exit.addActionListener(new ActionListener() {
 
