@@ -9,6 +9,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,6 +51,8 @@ public class ServerSide{
 	private JLabel nameTitle;
 	private JLabel companyTitle;
 	private JLabel adminPassTitle;
+	//Image Icon
+	ImageIcon frameIcon = new ImageIcon("src\\remoteAccesDatabaseServer\\ServerIcon.png");
 	
 	
 	
@@ -61,6 +64,7 @@ public class ServerSide{
 		serverSide.setSize(1300, 1300);
 		serverSide.setTitle("Server Side");
 		serverSide.setDefaultCloseOperation(serverSide.EXIT_ON_CLOSE);
+		serverSide.setIconImage(frameIcon.getImage());
 		
 		
 		//Container "c"
@@ -226,6 +230,7 @@ public class ServerSide{
 		registryF.setLocation(346, 103);
 		registryF.setResizable(false);
 		registryF.setVisible(true);
+		registryF.setIconImage(frameIcon.getImage());
 		
 		//Remove when you transfer
 		//registryF.setDefaultCloseOperation(registryF.EXIT_ON_CLOSE);
@@ -301,6 +306,7 @@ public class ServerSide{
 		registerUserF.setLocation(709, 125);
 		//registryF.setResizable(false);
 		registerUserF.setVisible(true);
+		registerUserF.setIconImage(frameIcon.getImage());
 		
 		Container registerUserC = new Container();
 		registerUserC.setLayout(null);
