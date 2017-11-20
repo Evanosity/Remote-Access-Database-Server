@@ -20,50 +20,51 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import com.sun.xml.internal.ws.api.Component;
-
-@SuppressWarnings("serial")
 public class ServerSide{
 	
+	private static JFrame serverSide;
+	private static JFrame registryF;
+	private static JFrame registerUserF;
+	
 	//Declaring Components (Main)
-	private JButton registerUser;
-	private JButton shutdown;
-	private JButton lockAll;
-	private JButton registry;
-	private JTextArea log;
-	private JTextArea logTextArea;
-	private JLabel action;
-	private JPanel right;
-	private JScrollPane logField;
+	private static JButton registerUser;
+	private static JButton shutdown;
+	private static JButton lockAll;
+	private static JButton registry;
+	private static JTextArea log;
+	private static JTextArea logTextArea;
+	private static JLabel action;
+	private static JPanel right;
+	private static JScrollPane logField;
 	//(Registry + Register User)
-	public JButton exit;
+	public static JButton exit;
 	//(Registry)
-	private JLabel nameLabel;
-	private JLabel companyLabel;
-	private JLabel account;
+	private static JLabel nameLabel;
+	private static JLabel companyLabel;
+	private static JLabel account;
 	//(Register User)
-	private JButton enter;
-	private JTextField name;
-	private JTextField company;
-	private JTextField adminPass;
-	private JLabel companyError;
-	private JLabel adminPassError;
-	private JLabel nameTitle;
-	private JLabel companyTitle;
-	private JLabel adminPassTitle;
+	private static JButton enter;
+	private static JTextField name;
+	private static JTextField company;
+	private static JTextField adminPass;
+	private static JLabel companyError;
+	private static JLabel adminPassError;
+	private static JLabel nameTitle;
+	private static JLabel companyTitle;
+	private static JLabel adminPassTitle;
 	//Image Icon
-	ImageIcon frameIcon = new ImageIcon("src\\remoteAccesDatabaseServer\\ServerIcon.png");
+	private static ImageIcon frameIcon = new ImageIcon("src\\remoteAccesDatabaseServer\\ServerIcon.png");
 	
 	
 	
-	ServerSide(){
-		JFrame serverSide = new JFrame();
+	public ServerSide(){
+		serverSide = new JFrame();
 		
 		//JFrame Details
 		serverSide.setVisible(true);
 		serverSide.setSize(1300, 1300);
 		serverSide.setTitle("Server Side");
-		serverSide.setDefaultCloseOperation(serverSide.EXIT_ON_CLOSE);
+		serverSide.setDefaultCloseOperation(2); //2=EXIT_ON_CLOSE
 		serverSide.setIconImage(frameIcon.getImage());
 		
 		
@@ -219,13 +220,13 @@ public class ServerSide{
 		
 	}
 	
-	void registryFrame(){
+	public void registryFrame(){
 		JPanel left = new JPanel();
 		JPanel middle = new JPanel();
 		JPanel right = new JPanel();
 		
 		//New Frame Specs
-		JFrame registryF = new JFrame("Registry Frame");
+		registryF = new JFrame("Registry Frame");
 		registryF.setSize(525, 630);
 		registryF.setLocation(346, 103);
 		registryF.setResizable(false);
@@ -300,8 +301,8 @@ public class ServerSide{
 	}
 	
 	
-	void registerUser() {
-		JFrame registerUserF = new JFrame("Register User");
+	public void registerUser() {
+		registerUserF = new JFrame("Register User");
 		registerUserF.setSize(576, 335);
 		registerUserF.setLocation(709, 125);
 		//registryF.setResizable(false);
