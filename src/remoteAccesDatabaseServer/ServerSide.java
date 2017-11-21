@@ -66,6 +66,7 @@ public class ServerSide{
 		serverSide.setTitle("Server Side");
 		serverSide.setDefaultCloseOperation(2); //2=EXIT_ON_CLOSE
 		serverSide.setIconImage(frameIcon.getImage());
+		serverSide.setResizable(false);
 		
 		
 		//Container "c"
@@ -78,6 +79,8 @@ public class ServerSide{
 		//Log Text Area
 		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
 		log.setBackground(serverSide.getBackground());
+		log.setSize(10, 10);
+		log.setLocation(10, 10);
 		log.setBorder(black);
 		log.setVisible(true);
 		c.add(log);
@@ -86,6 +89,8 @@ public class ServerSide{
 		//Action Label
 		action = new JLabel("Action" );
 		action.setHorizontalAlignment(SwingConstants.CENTER);
+		action.setSize(10, 10);
+		action.setLocation(10, 10);
 		action.setBorder(black);
 		action.setVisible(true);
 		c.add(action);
@@ -93,6 +98,8 @@ public class ServerSide{
 		
 		//Right Panel
 		right = new JPanel();
+		right.setSize(10, 10);
+		right.setLocation(10, 10);
 		right.setBorder(black);
 		right.setVisible(true);
 		c.add(right);
@@ -100,6 +107,8 @@ public class ServerSide{
 		
 		//Log Text Area
 		logTextArea = new JTextArea();
+		logTextArea.setSize(10, 10);
+		logTextArea.setLocation(10, 10);
 		logTextArea.setBorder(black);
 		logTextArea.setBackground(serverSide.getBackground());
 		logTextArea.setEditable(false);
@@ -107,12 +116,16 @@ public class ServerSide{
 		
 		//JScrollPane logField
 		logField = new JScrollPane(logTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		logField.setSize(10, 10);
+		logField.setLocation(10, 10);
 		logField.setVisible(true);
 		c.add(logField);
 		
 		
 		//Register User Button
 		registerUser = new JButton("Register User");
+		registerUser.setSize(10, 10);
+		registerUser.setLocation(10, 10);
 		registerUser.setVisible(true);
 		c.add(registerUser);
 		registerUser.addActionListener(new ActionListener() {
@@ -127,6 +140,8 @@ public class ServerSide{
 		
 		//Shutdown Button
 		shutdown = new JButton("Shutdown");
+		shutdown.setSize(10, 10);
+		shutdown.setLocation(10, 10);
 		shutdown.setVisible(true);
 		shutdown.addActionListener(new ActionListener() {
 
@@ -165,35 +180,7 @@ public class ServerSide{
 		 * this insures no matter the screen size all components should be 
 		 * located properly
 		 */
-		serverSide.getContentPane().addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) {
-					//Log
-				log.setLocation(0, 0);
-				log.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.10));
-					//Action
-				action.setLocation((serverSide.getWidth()/2), 0);
-				action.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.10));
-					//Left
-				logField.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.90));
-				logField.setLocation(0, (int)(serverSide.getHeight()*0.10));
-					//Right
-				right.setSize(serverSide.getWidth()/2, (int)(serverSide.getHeight()*0.90));
-				right.setLocation((serverSide.getWidth()/2), (int)(serverSide.getHeight()*0.10));
-					//Register User
-				registerUser.setSize(200,75);
-				registerUser.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.15));
-					//Shutdown
-				shutdown.setSize(200,75);
-				shutdown.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.35));
-					//Lock All
-				lockAll.setSize(200,75);
-				lockAll.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.55));
-					//Registry
-				registry.setSize(200,75);
-				registry.setLocation((serverSide.getWidth()/2) + (int)(serverSide.getWidth()*0.1),(int)(serverSide.getHeight()*.75));
-				
-			}
-		});
+		
 		
 		
 		//Set Layer Components on container
