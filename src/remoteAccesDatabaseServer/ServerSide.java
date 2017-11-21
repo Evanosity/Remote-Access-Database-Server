@@ -36,6 +36,7 @@ public class ServerSide{
 	private static JLabel action;
 	private static JPanel right;
 	private static JScrollPane logField;
+	private boolean usersLocked = false;
 	//(Registry + Register User)
 	public static JButton exit;
 	//(Registry)
@@ -62,7 +63,7 @@ public class ServerSide{
 		
 		//JFrame Details
 		serverSide.setVisible(true);
-		serverSide.setSize(1300, 1300);
+		serverSide.setSize(1372, 774);
 		serverSide.setTitle("Server Side");
 		serverSide.setDefaultCloseOperation(2); //2=EXIT_ON_CLOSE
 		serverSide.setIconImage(frameIcon.getImage());
@@ -79,8 +80,8 @@ public class ServerSide{
 		//Log Text Area
 		log = new JTextArea("Server Access Log - click here for full log" + "\n" + "Latest Entries on Log" );
 		log.setBackground(serverSide.getBackground());
-		log.setSize(10, 10);
-		log.setLocation(10, 10);
+		log.setSize(686, 40);
+		log.setLocation(0, 0);
 		log.setBorder(black);
 		log.setVisible(true);
 		c.add(log);
@@ -89,8 +90,8 @@ public class ServerSide{
 		//Action Label
 		action = new JLabel("Action" );
 		action.setHorizontalAlignment(SwingConstants.CENTER);
-		action.setSize(10, 10);
-		action.setLocation(10, 10);
+		action.setSize(686, 40);
+		action.setLocation(686, 0);
 		action.setBorder(black);
 		action.setVisible(true);
 		c.add(action);
@@ -98,8 +99,8 @@ public class ServerSide{
 		
 		//Right Panel
 		right = new JPanel();
-		right.setSize(10, 10);
-		right.setLocation(10, 10);
+		right.setSize(686, 734);
+		right.setLocation(686, 40);
 		right.setBorder(black);
 		right.setVisible(true);
 		c.add(right);
@@ -107,8 +108,8 @@ public class ServerSide{
 		
 		//Log Text Area
 		logTextArea = new JTextArea();
-		logTextArea.setSize(10, 10);
-		logTextArea.setLocation(10, 10);
+		logTextArea.setSize(686, 734);
+		logTextArea.setLocation(0, 40);
 		logTextArea.setBorder(black);
 		logTextArea.setBackground(serverSide.getBackground());
 		logTextArea.setEditable(false);
@@ -116,16 +117,16 @@ public class ServerSide{
 		
 		//JScrollPane logField
 		logField = new JScrollPane(logTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		logField.setSize(10, 10);
-		logField.setLocation(10, 10);
+		logField.setSize(686, 734);
+		logField.setLocation(0, 40);
 		logField.setVisible(true);
 		c.add(logField);
 		
 		
 		//Register User Button
 		registerUser = new JButton("Register User");
-		registerUser.setSize(10, 10);
-		registerUser.setLocation(10, 10);
+		registerUser.setSize(200,75);
+		registerUser.setLocation(750, 100);
 		registerUser.setVisible(true);
 		c.add(registerUser);
 		registerUser.addActionListener(new ActionListener() {
@@ -133,6 +134,7 @@ public class ServerSide{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				registerUser();
+				//System.out.println("Width: " + serverSide.getWidth() + "Height: " + serverSide.getHeight());
 			}
 			
 		});
@@ -140,8 +142,8 @@ public class ServerSide{
 		
 		//Shutdown Button
 		shutdown = new JButton("Shutdown");
-		shutdown.setSize(10, 10);
-		shutdown.setLocation(10, 10);
+		shutdown.setSize(200,75);
+		shutdown.setLocation(750, 250);
 		shutdown.setVisible(true);
 		shutdown.addActionListener(new ActionListener() {
 
@@ -156,11 +158,29 @@ public class ServerSide{
 		
 		//Lock All Users Button
 		lockAll = new JButton("Lock All Users");
+		lockAll.setSize(200,75);
+		lockAll.setLocation(750, 400);
 		lockAll.setVisible(true);
+		lockAll.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(usersLocked) {
+					usersLocked = false;
+					lockAll.setText("Lock All Users");
+				}else {
+					usersLocked = true;
+					lockAll.setText("Unclock All Users");
+				}
+			}
+			
+		});
 		c.add(lockAll);
 		
 		//Registry Button
 		registry=new JButton("User Registry");
+		registry.setSize(200,75);
+		registry.setLocation(750, 550);
 		registry.setVisible(true);
 		c.add(registry);
 		registry.addActionListener(new ActionListener() {
@@ -192,7 +212,7 @@ public class ServerSide{
 		
 		
 		
-		serverSide.add(c);
+		serverSide.getContentPane().add(c);
 		/**
 		 * Shrinks JFrame to smallest possible size
 		 * This is to fix a bug that a component won't
@@ -201,7 +221,7 @@ public class ServerSide{
 		
 		
 		serverSide.pack();
-		serverSide.setSize(1300, 1300);
+		serverSide.setSize(1372, 774);
 		serverSide.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		
