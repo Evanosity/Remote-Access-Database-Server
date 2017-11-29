@@ -1,5 +1,7 @@
 package remoteAccesDatabaseServer;
 
 public class Networking {
-	//Your eclipse sucks; download Oxygen
+	public Networking(){
+		//this will be fun.
+	}
 }
