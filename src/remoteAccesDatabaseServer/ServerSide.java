@@ -5,6 +5,12 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -41,6 +48,10 @@ public class ServerSide{
 	private static JLabel nameLabel;
 	private static JLabel companyLabel;
 	private static JLabel account;
+	private static JTable registryTable;
+	private static String tableTitles[] = new String[]{
+		"Name","Company","Account Creation Date"
+	};
 	//(Register User)
 	private static JButton enter;
 	private static JTextField name;
@@ -63,7 +74,7 @@ public class ServerSide{
 		serverSide.setVisible(true);
 		serverSide.setSize(1372, 774);
 		serverSide.setTitle("Server Side");
-		serverSide.setDefaultCloseOperation(2); //2=EXIT_ON_CLOSE
+		serverSide.setDefaultCloseOperation(3); //3=EXIT_ON_CLOSE
 		serverSide.setIconImage(frameIcon.getImage());
 		serverSide.setResizable(false);
 		
@@ -249,20 +260,35 @@ public class ServerSide{
 		regC.setLayout(null);
 		registryF.getContentPane().add(regC);
 		
-		left.setBorder(black);
-		left.setSize(175,516);
-		left.setLocation(0,25);
-		regC.add(left);
 		
-		middle.setBorder(black);
-		middle.setSize(175,516);
-		middle.setLocation(175,25);
-		regC.add(middle);
+		//This is a temporary array which will be removed once we have actual data to pull
+		String columnsInfo[][] = new String[][] {
+			{"Evan","ECCo","30/11/2017"},
+			{"Cameron","ECCo","30/11/2017"}
+		};
 		
-		right.setBorder(black);
-		right.setSize(169,516);
-		right.setLocation(350,25);
-		regC.add(right);
+		registryTable = new JTable(columnsInfo, tableTitles){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+		registryTable.setSize(519,540);
+		registryTable.setLocation(0,0);
+		registryTable.setVisible(true);
+		registryTable.setFillsViewportHeight(true);
+		registryTable.setBackground(registryF.getBackground());
+		registryTable.getTableHeader().setBorder(black);
+		registryTable.setGridColor(Color.BLACK);
+		
+		
+		JScrollPane scrollPane = new JScrollPane(registryTable);
+		scrollPane.setSize(519,540);
+		scrollPane.setLocation(0,0);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		regC.add(scrollPane);
 				
 		
 		nameLabel = new JLabel("Name");
@@ -290,7 +316,7 @@ public class ServerSide{
 		//Exit button
 		exit = new JButton("Exit");
 		exit.setSize(100, 50);
-		exit.setLocation(262, 540);
+		exit.setLocation(208, 540);
 		exit.setVisible(true);
 		exit.addActionListener(new ActionListener() {
 
