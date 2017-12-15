@@ -23,6 +23,8 @@ public class NetworkServer {
 	
 	private int port;
 	
+	private String[] messageBuffer;
+	
 	/**
 	 * public Networking - constructor for this class; used to set up the class and prepares for data to be sent/received.
 	 * @param portNumber - the port to be used.
@@ -44,6 +46,25 @@ public class NetworkServer {
 		}
 		receive=new DataInputStream(server.getInputStream());
 		send=new DataOutputStream(server.getOutputStream());
+		
+		collectMessage();
+	}
+	
+	/**
+	 * private void collectMessage - this method constantly looks for new messages to be received, and then throws them into a big array that can be recalled at any time.
+	 * @throws IOException
+	 */
+	private void collectMessage() throws IOException{
+		messageBuffer=new String[1];
+		int z=0;
+		
+		while(true){
+			if(z>=messageBuffer.length){
+				messageBuffer=extendArray(messageBuffer);
+			}
+			messageBuffer[z]=receive.readUTF();
+			z++;
+		}
 	}
 	
 	/**
@@ -51,8 +72,9 @@ public class NetworkServer {
 	 * @return the received message
 	 * @throws IOException
 	 */
-	public String receiveMessage() throws IOException{
-		return receive.readUTF();
+	public String[] receiveMessage() throws IOException{
+		//return receive.readUTF();
+		return messageBuffer;
 	}
 	
 	/**
@@ -84,5 +106,21 @@ public class NetworkServer {
 	 */
 	public String getConnectionAddress(){
 		return null;
+	}
+	
+	/**
+	 * private String[] extendArray - this is a method for enlarging an array if it becomes full.
+	 * @param toExtend
+	 * @return
+	 */
+	private String[] extendArray(String[]toExtend){
+		String[]extended;
+		
+		extended=new String[toExtend.length*2];
+		for(int i=0;i!=toExtend.length;){
+			extended[i]=toExtend[i];
+		}
+		
+		return extended;
 	}
 }
