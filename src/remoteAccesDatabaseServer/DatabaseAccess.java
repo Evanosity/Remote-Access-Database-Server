@@ -15,6 +15,7 @@ public class DatabaseAccess {
 	//the connection to the database in object form
 	private Connection con;
 	private Statement stmt;
+	private String useTable;
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -22,10 +23,8 @@ public class DatabaseAccess {
 	 * @param username - the username for the database
 	 * @param password - the password for the database
 	 */
-	public DatabaseAccess(String location, String username, String password){
-		//host=location;
-		//uname=username;
-		//pass=password;
+	public DatabaseAccess(String table){
+		useTable = table;
 		initializeDatabase();
 	}
 
@@ -53,13 +52,12 @@ public class DatabaseAccess {
 		try{ 
 			
 			//Execute SQL query
-			ResultSet rs=stmt.executeQuery("select * from SWDB_INVOICE ORDER BY INVOICE_ID");
+			ResultSet rs=stmt.executeQuery("select * from " + useTable);
 			//System.out.println("Executed Query");
 			
 			//Process Result Set
 			while(rs.next())  
-			System.out.println(rs.getInt("INVOICE_ID") + ", " + rs.getString("INVOICE_NO") + "," + rs.getString("INVOICE_TRANSACTION_AMOUNT"));
-			//System.out.println(rs.getRowId(1));
+			System.out.println(rs.getInt(1) + " : " + rs.getString(2) + " : " + rs.getString(3) + " : " + rs.getString(4) + " : " + rs.getString(5) + " : " + rs.getString(6) + " : " + rs.getInt(7) + " : " + rs.getString(8) + " : " + rs.getString(9) + " : " + rs.getInt(10) + " : " + rs.getString(11) + " : " + rs.getString(12));//Currentl for table SWDB_SYSTEM
 			System.out.println("Done");
 			con.close();  
 			}catch(Exception e){ System.out.println(e);}  

@@ -231,7 +231,6 @@ public class ServerSide{
 		
 		serverSide.pack();
 		serverSide.setSize(1372, 774);
-		serverSide.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		
 	}
