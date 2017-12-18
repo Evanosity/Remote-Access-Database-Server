@@ -1,16 +1,6 @@
 package remoteAccesDatabaseServer;
 
 import java.io.IOException;
-<<<<<<< HEAD
-
-public class Main {	
-	public static void main(String[] args) throws IOException{
-		//ServerSide ss = new ServerSide();
-		//ss.registerUser();
-		
-=======
-
-import javax.swing.JFrame;
 
 public class Main {	
 	
@@ -27,9 +17,9 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		db = new DatabaseAccess("SWDB_System");
+		// Doesn't contain correct variables 
+		//db = new DatabaseAccess("SWDB_System");
 				
->>>>>>> GUI
 		//DatabaseAccess e=new DatabaseAccess("","","");
 		//e.closeDatabase();
 	}
