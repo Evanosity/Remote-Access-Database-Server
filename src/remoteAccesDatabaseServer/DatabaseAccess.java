@@ -16,6 +16,10 @@ public class DatabaseAccess {
 	private Connection con;
 	private Statement stmt;
 	private String useTable;
+	private String pass;
+	private String uname;
+	private String host;
+	private int port;
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -23,7 +27,11 @@ public class DatabaseAccess {
 	 * @param username - the username for the database
 	 * @param password - the password for the database
 	 */
-	public DatabaseAccess(String table){
+	public DatabaseAccess(String location, String username, String password, int portNum, String table){
+		host=location;
+		uname=username;
+		pass=password;
+		port = portNum;
 		useTable = table;
 		initializeDatabase();
 	}
@@ -35,8 +43,8 @@ public class DatabaseAccess {
 			
 			//Get Connection
 			con = DriverManager.getConnection(  
-			"jdbc:oracle:thin:SWDB_API_USER/dean22@localhost:1521:SWDB");
-			//here SWDB.192.168.0.28 is database name, root is username and password
+					"jdbc:oracle:thin:" + uname + "/" + pass + "@" + host + ":" + port + ":SWDB");
+			//"jdbc:oracle:thin:SWDB_API_USER/dean22@localhost:1521:SWDB"
 			
 			//Create Statement
 			stmt = con.createStatement();
