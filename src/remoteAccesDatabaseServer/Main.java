@@ -18,7 +18,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		// Doesn't contain correct variables 
-		//db = new DatabaseAccess("SWDB_System");
+		db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_System");
 				
 		//DatabaseAccess e=new DatabaseAccess("","","");
 		//e.closeDatabase();
