@@ -2,13 +2,10 @@ package remoteAccesDatabaseServer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-<<<<<<< HEAD
 import java.sql.SQLException;
-=======
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
->>>>>>> GUI
 
 /**
  * DatabaseAccess class - this class contains the methods for retrieving information from the database, and initializing the database.
@@ -16,15 +13,6 @@ import java.sql.Statement;
  * @date November 29 2017
  */
 public class DatabaseAccess {
-<<<<<<< HEAD
-	//parameters for database access
-	private String host;
-	private String uname;
-	private String pass;
-	
-	//the connection to the database in object form
-	private Connection con;
-=======
 	//the connection to the database in object form
 	private Connection con;
 	private Statement stmt;
@@ -33,7 +21,6 @@ public class DatabaseAccess {
 	private String uname;
 	private String host;
 	private int port;
->>>>>>> GUI
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -41,37 +28,6 @@ public class DatabaseAccess {
 	 * @param username - the username for the database
 	 * @param password - the password for the database
 	 */
-<<<<<<< HEAD
-	public DatabaseAccess(String location, String username, String password){
-		host=location;
-		uname=username;
-		pass=password;
-		initializeDatabase();
-	}
-	
-	/**
-	 * public String[][]getData - this is the main database access method; where it will fetch the data and then send it back in array form.
-	 * @param query - The query for information, in string form.
-	 * @return the generated section of data
-	 */
-	public String[][]getData(String[] query){
-		//this is the one part of the project that is gonna bust our balls. Sending proper queries to the database..... good god.
-		return null;
-	}
-	
-	/**
-	 * private void initializeDatabase - this is the method that initializes the connection to the database; data can then be fetched.
-	 * FOR FUTURE - when starting the database side, user will have to enter the username, the password and the "host" of the database.
-	 * We will keep it as something simple.
-	 */
-	private void initializeDatabase(){
-		try{
-			con=DriverManager.getConnection(host, uname, pass);
-			//this *should* work.... However, we will need to set up an identical test environment to the one that will be on the permanent host computer.
-			con.close();
-		}
-		catch(SQLException e){
-=======
 	public DatabaseAccess(String location, String username, String password, int portNum, String table){
 		host=location;
 		uname=username;
@@ -149,12 +105,9 @@ public class DatabaseAccess {
 			con.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
->>>>>>> GUI
 			e.printStackTrace();
 		}
 	}
-	
-<<<<<<< HEAD
 	/**
 	 * public void closeDatabase - simple method for closing the database.
 	 */
@@ -166,8 +119,6 @@ public class DatabaseAccess {
 			e.printStackTrace();
 		}
 	}
-}
-=======
 	public void exitDatabase() {
 		try {
 			con.close();
@@ -176,9 +127,4 @@ public class DatabaseAccess {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
 }
->>>>>>> GUI
