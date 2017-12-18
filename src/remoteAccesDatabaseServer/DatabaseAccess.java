@@ -119,12 +119,4 @@ public class DatabaseAccess {
 			e.printStackTrace();
 		}
 	}
-	public void exitDatabase() {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
