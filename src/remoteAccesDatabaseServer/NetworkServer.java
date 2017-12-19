@@ -47,7 +47,7 @@ public class NetworkServer {
 		receive=new DataInputStream(server.getInputStream());
 		send=new DataOutputStream(server.getOutputStream());
 		
-		collectMessage();
+		//collectMessage();
 	}
 	
 	/**
@@ -74,6 +74,15 @@ public class NetworkServer {
 	 */
 	public String[] receiveMessage() throws IOException{
 		//return receive.readUTF();
+		return messageBuffer;
+	}
+	
+	/**
+	 * public String getMessafes - this method will return all of the stored messagess.
+	 * @return the received messages
+	 * @throws IOException
+	 */
+	public String[] getMessages() throws IOException{
 		return messageBuffer;
 	}
 	
