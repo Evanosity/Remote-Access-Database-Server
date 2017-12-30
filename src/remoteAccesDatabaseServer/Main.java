@@ -25,5 +25,12 @@ public class Main {
 			e.printStackTrace();
 		}
 		db = new DatabaseAccess(location, username, password, portData, table);
+		
+		try {
+			ns.sendMessage(/* This will send an array of information */ "Yes" );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
