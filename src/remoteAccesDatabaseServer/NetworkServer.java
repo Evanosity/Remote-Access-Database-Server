@@ -94,6 +94,11 @@ public class NetworkServer {
 		send.writeUTF(toSend);
 	}
 	
+	public void sendArray(String[] toSend)throws IOException{
+		for(int i=0; i!=toSend.length; i++){
+			send.writeUTF(toSend[i]);
+		}
+	}
 	/**
 	 * public void shutdown - this method safely closes the connection and server.
 	 */
