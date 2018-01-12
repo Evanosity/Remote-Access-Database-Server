@@ -23,7 +23,6 @@ public class NetworkServer {
 	
 	private int port;
 	
-	private String[] messageBuffer;
 	
 	/**
 	 * public Networking - constructor for this class; used to set up the class and prepares for data to be sent/received.
@@ -47,24 +46,6 @@ public class NetworkServer {
 		receive=new DataInputStream(server.getInputStream());
 		send=new DataOutputStream(server.getOutputStream());
 		
-		//collectMessage();
-	}
-	
-	/**
-	 * private void collectMessage - this method constantly looks for new messages to be received, and then throws them into a big array that can be recalled at any time.
-	 * @throws IOException
-	 */
-	private void collectMessage() throws IOException{
-		messageBuffer=new String[1];
-		int z=0;
-		
-		while(true){
-			if(z>=messageBuffer.length){
-				messageBuffer=extendArray(messageBuffer);
-			}
-			messageBuffer[z]=receive.readUTF();
-			z++;
-		}
 	}
 	
 	/**
@@ -72,18 +53,16 @@ public class NetworkServer {
 	 * @return the received message
 	 * @throws IOException
 	 */
-	public String[] receiveMessage() throws IOException{
-		//return receive.readUTF();
-		return messageBuffer;
+	public String receiveMessage() throws IOException{
+		return receive.readUTF();
 	}
 	
-	/**
-	 * public String getMessafes - this method will return all of the stored messagess.
-	 * @return the received messages
-	 * @throws IOException
-	 */
-	public String[] getMessages() throws IOException{
-		return messageBuffer;
+	public String[] receiveArray(int size) throws IOException{
+		String[] toReturn=new String[size];
+		for(int i=0; i!=size; i++){
+			toReturn[i]=receive.readUTF();
+		}
+		return toReturn;
 	}
 	
 	/**
@@ -94,6 +73,11 @@ public class NetworkServer {
 		send.writeUTF(toSend);
 	}
 	
+	/**
+	 * public void sendArray - this method sends a 1d string array to the client.
+	 * @param toSend - string array to send
+	 * @throws IOException
+	 */
 	public void sendArray(String[] toSend)throws IOException{
 		for(int i=0; i!=toSend.length; i++){
 			send.writeUTF(toSend[i]);
