@@ -66,6 +66,38 @@ public class NetworkServer {
 	}
 	
 	/**
+	 * public String[][][] receiveSuperArray - this method will receive a 3d array from the client 
+	 * @param x - the size of the first array
+	 * @param y - the size of the second array
+	 * @param z - this size of the third array
+	 * @return toReturn - the organized 3d array
+	 * @throws IOException
+	 */
+	public String[][][] receiveSuperArray(int x, int y, int z)throws IOException{
+		String[][][]toReturn=new String[x][y][z];
+		String[]unorganized=new String[x*y*z];
+		int a=0;
+		
+		//this loop will simply collect all the information and then immediately store it.
+		for(int i=0; i!=toReturn.length; i++){
+			for(int k=0; k!=toReturn[i].length;k++){
+				for(int l=0; l!=toReturn[i][k].length;l++){
+					a++;
+					unorganized[a]=receive.readUTF();
+				}
+			}
+		}
+		
+		//this loop will evaluate all of the information we received and organize it appropriately.
+		for(int i=0; i!=unorganized.length; i++){
+			//TODO - after we decide how to format information being sent over the database, this will decode that and fill "toReturn" properly.
+			toReturn[1][2][3]=unorganized[i];
+		}
+		
+		return toReturn;
+	}
+	
+	/**
 	 * public void sendMessage - this method sends a specified message to the client.
 	 * @param toSend - the message to send.
 	 */
@@ -79,10 +111,45 @@ public class NetworkServer {
 	 * @throws IOException
 	 */
 	public void sendArray(String[] toSend)throws IOException{
+		send.writeUTF("messagelength:"+toSend.length);
 		for(int i=0; i!=toSend.length; i++){
-			send.writeUTF(toSend[i]);
+			send.writeUTF("arrayID:"+i+":Message:"+toSend[i]);
 		}
 	}
+	
+	/**
+	 * public void sendSuperArray - this method will send a 3d array over the network. It's a bit convoluted but it works.
+	 * @param toSend - this is the 3d to send.
+	 * @throws IOException
+	 */
+	public void sendSuperArray(String[][][]toSend)throws IOException{
+		int fullLength=0;
+
+		//this loop will read the size of the array. This is important, as the client needs to prepare for the volume of information we are sending.
+		for(int i=0; i!=toSend.length; i++){
+			for(int k=0; k!=toSend[i].length;k++){
+				for(int l=0; l!=toSend[i][k].length;l++){
+					fullLength++;
+				}
+			}
+		}
+		send.writeUTF("messagelength:"+fullLength);
+		
+		//This loop will actually send each piece of information. However, it also adds an array ID string to each one of the messages.
+		//This is so that if the packets for some reason don't arrive in the proper order, the receiver can piece it back together.
+		for(int i=0; i!=toSend.length; i++){
+			for(int k=0; k!=toSend[i].length;k++){
+				for(int l=0; l!=toSend[i][k].length;l++){
+					send.writeUTF("arrayID:"				
+							+i+"!"
+							+k+"!"
+							+l+"!"
+							+":Message:"+toSend[i][k][l]);
+				}
+			}
+		}
+	}
+	
 	/**
 	 * public void shutdown - this method safely closes the connection and server.
 	 */
