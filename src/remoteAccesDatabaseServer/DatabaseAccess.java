@@ -56,8 +56,10 @@ public class DatabaseAccess {
 		
 	}
 	
-	public void select() {
-		
+	public String[][][] select() {
+		int rows = count();
+		int currentColumn = 0;
+		String[][][] info = new String[0][rows][0];
 		try{ 
 			
 			//Execute SQL query
@@ -65,12 +67,17 @@ public class DatabaseAccess {
 			//System.out.println("Executed Query");
 			
 			//Process Result Set
-			while(rs.next())  
-			System.out.println(rs.getInt(1) + " : " + rs.getString(2) + " : " + rs.getString(3) + " : " + rs.getString(4) + " : " + rs.getString(5) + " : " + rs.getString(6) + " : " + rs.getInt(7) + " : " + rs.getString(8) + " : " + rs.getString(9) + " : " + rs.getInt(10) + " : " + rs.getString(11) + " : " + rs.getString(12));//Currentl for table SWDB_SYSTEM
-			System.out.println("Done");
-			con.close();  
-			}catch(Exception e){ System.out.println(e);}  
+			while(rs.next())  {
+				for(int i = 0; i != rows; i++) {
+					info[currentColumn][i][0] = rs.getString(currentColumn);
+				}
+				currentColumn++;
+				info = extendArray3D(info, currentColumn, rows, 0);
 			}
+			con.close();  
+			}catch(Exception e){ System.out.println(e);}
+		return info;
+	}
 	
 	public void update() {
 		try {
@@ -118,5 +125,35 @@ public class DatabaseAccess {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public int count() {
+		int num = 0;
+		
+		try {
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM" + useTable);
+			if(rs.next()) {
+				num = Integer.parseInt(rs.getString(1));
+			}
+		}catch(Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		
+		return num;
+	}
+	
+	public String[][][] extendArray3D(String[][][] toExtend, int val1, int val2, int val3){
+		String[][][] extended;
+		
+		extended=new String[val1][val2][val3];
+		for(int i=0;i!=toExtend.length;){
+			for(int f = 0; f != toExtend[0].length;) {
+				for(int j = 0; j != toExtend[0][0].length;) {
+					extended[i][f][j] = toExtend[i][f][j];
+				}
+			}
+		}
+		
+		return extended;
 	}
 }

@@ -29,17 +29,24 @@ public class Main {
 				
 		//DatabaseAccess e=new DatabaseAccess("","","");
 		//e.closeDatabase();
-		db = new DatabaseAccess(location, username, password, portData, table);
+	   //	db = new DatabaseAccess(location, username, password, portData, table);
+		
+		try {
+			doTheThing(db.select());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * public void doTheThing - this is the method that runs the entire database. It waits for a message, then sends back the appropriate info. It then waits to receive the returned array, saves it properly and then loops back to the start.
 	 * @throws IOException
 	 */
-	public void doTheThing()throws IOException{
+	public static void doTheThing(String send[][][])throws IOException{
 		String received;
 		String[][] parameters;
-		String[][][]toSend;
+		String[][][]toSend = send;
 		
 		//the client sends a message containing first what the info is, and then any additional shit. For example, for sending info to store, it will have that it's sending info to store, and then the number of incoming packages. I don't think packet loss will be a thing, so we should be good.
 		
@@ -64,7 +71,7 @@ public class Main {
 	 * @param toDecode
 	 * @return
 	 */
-	public String[][] decodeParameters(String toDecode){
+	public static String[][] decodeParameters(String toDecode){
 		//TODO - make this method.
 		String[][]toSend=null;
 		return toSend;
