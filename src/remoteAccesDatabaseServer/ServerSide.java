@@ -136,7 +136,7 @@ public class ServerSide{
 		registerUser = new JButton("Register User");
 		registerUser.setSize(200,75);
 		registerUser.setLocation(750, 100);
-		registerUser.setVisible(true);
+		registerUser.setVisible(false);
 		c.add(registerUser);
 		registerUser.addActionListener(new ActionListener() {
 
@@ -158,6 +158,8 @@ public class ServerSide{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				Main m = new Main();
+				m.Shutdown();
 				serverSide.dispose();
 			}
 			
@@ -190,7 +192,7 @@ public class ServerSide{
 		registry=new JButton("User Registry");
 		registry.setSize(200,75);
 		registry.setLocation(750, 550);
-		registry.setVisible(true);
+		registry.setVisible(false);
 		c.add(registry);
 		registry.addActionListener(new ActionListener() {
 
@@ -212,12 +214,15 @@ public class ServerSide{
 		
 		
 		
+		
+		
 		//Set Layer Components on container
 		c.setComponentZOrder(right, 4);
 		c.setComponentZOrder(registerUser,0);
 		c.setComponentZOrder(shutdown,1);
 		c.setComponentZOrder(lockAll,2);
 		c.setComponentZOrder(registry,3);
+		
 		
 		
 		

@@ -32,7 +32,7 @@ public class Main {
 	   //	db = new DatabaseAccess(location, username, password, portData, table);
 		
 		try {
-			doTheThing(db.select(null));
+			doTheThing(db.select());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,5 +76,15 @@ public class Main {
 		//TODO - make this method.
 		String[][]toSend=null;
 		return toSend;
+	}
+	
+	public void Shutdown() {
+		try {
+			db.commit();
+			db.closeDatabase();
+			ns.shutdown();
+		}catch(Exception e) {
+			
+		}
 	}
 }

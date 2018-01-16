@@ -56,29 +56,58 @@ public class DatabaseAccess {
 		
 	}
 	
-	public String[][][] select(String[][] arguments) {
-		//TODO - add infinite expansion on arguments (Cam)
-		int rows = count();
-		int currentColumn = 0;
-		String[][][] info = new String[0][rows][0];
-		try{ 
-			
-			//Execute SQL query
-			ResultSet rs=stmt.executeQuery("select * from " + useTable);
-			//System.out.println("Executed Query");
-			
-			//Process Result Set
-			while(rs.next())  {
-				for(int i = 0; i != rows; i++) {
-					info[currentColumn][i][0] = rs.getString(currentColumn);
-				}
-				currentColumn++;
-				info = extendArray3D(info, currentColumn, rows, 0);
-			}
-			con.close();  
-			}catch(Exception e){ System.out.println(e);}
-		return info;
-	}
+	public String[][][] select() {
+        System.out.println("Pulling");
+        int rows = count();
+        //int currentColumn = 1;
+        String[][][] info;
+        switch(useTable) {
+        case("SWDB_SYSTEM"):
+        	info = new String[12][rows][1];
+        	break;
+        case("SWD_COMPANY"):
+        	info = new String[12][rows][1];
+        	break;
+        case("SWDB_IVOICE"):
+        	info = new String[14][rows][1];
+        	break;
+        case("SWD_EXPENSE"):
+        	info = new String[14][rows][1];
+        	break;
+        default:
+        	info = new String[14][rows][1];
+        	break;
+        }
+        
+        try{ 
+            
+            //Execute SQL query
+            ResultSet rs=stmt.executeQuery("select * from " + useTable);
+            //System.out.println("Executed Query");
+            
+            //Process Result Set
+            while(rs.next()) {
+            info[0][rows][0] = rs.getString(1);
+            info[1][rows][0] = rs.getString(2);
+            info[2][rows][0] = rs.getString(3);
+            info[3][rows][0] = rs.getString(4);
+            info[4][rows][0] = rs.getString(5);
+            info[5][rows][0] = rs.getString(6);
+            info[6][rows][0] = rs.getString(7);
+            info[7][rows][0] = rs.getString(8);
+            info[8][rows][0] = rs.getString(9);
+            info[9][rows][0] = rs.getString(10);
+            info[10][rows][0] = rs.getString(11);
+            info[11][rows][0] = rs.getString(12);
+            rows++;
+            }
+            
+            
+            con.close();  
+            }catch(Exception e){ System.out.println(e);}
+            
+        return info;
+    }
 	
 	public void update() {
 		try {
