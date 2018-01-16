@@ -152,6 +152,7 @@ public class NetworkServer {
 			for(int k=0; k!=toSend[i].length;k++){
 				for(int l=0; l!=toSend[i][k].length;l++){
 					send.writeUTF(i+":"+k+":"+l+":"+toSend[i][k][l]);
+					System.out.println(toSend[i][k][l]);
 				}
 			}
 		}

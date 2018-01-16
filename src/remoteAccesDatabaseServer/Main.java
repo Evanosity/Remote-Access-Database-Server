@@ -16,8 +16,33 @@ public class Main {
 	private final static int portData = 1521;	//Database Access Port
 	private static String table = "SWDB_System";
 	
+	
 	public static void main(String[] args){
-		ss = new ServerSide();
+		
+		String[][][] toSend=new String[5][5][5];
+		
+		for(int i=0; i!=5; i++){
+			for(int k=0; k!=5;k++){
+				for(int l=0; l!=5;l++){
+					toSend[i][k][l]=i+" "+k+" "+l+" ";
+				}
+			}
+		}
+		try{
+			ns=new NetworkServer(portNet);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		try {
+			ns.sendSuperArray(toSend);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/**ss = new ServerSide();
 		
 		try {
 			 ns = new NetworkServer(portNet);
@@ -36,7 +61,7 @@ public class Main {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 	
