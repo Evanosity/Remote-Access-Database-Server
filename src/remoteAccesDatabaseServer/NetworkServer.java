@@ -72,10 +72,28 @@ public class NetworkServer {
 	 * @return toReturn - the organized 3d array
 	 * @throws IOException
 	 */
-	public String[][][] receiveSuperArray(int x, int y, int z)throws IOException{
+	public String[][][] receiveSuperArray()throws IOException{
+		int x=0;
+		int y=0;
+		int z=0;
+		String size="";
+
+		size=receive.readUTF();
+		
+		x=Integer.parseInt(size.substring(size.lastIndexOf(":")+1, size.length()));
+		size=size.substring(0, size.lastIndexOf(":"));
+		
+		y=Integer.parseInt(size.substring(size.lastIndexOf(":")+1, size.length()));
+		size=size.substring(0, size.lastIndexOf(":"));
+		
+		z=Integer.parseInt(size.substring(size.lastIndexOf(":")+1, size.length()));
+		size=size.substring(0, size.lastIndexOf(":"));
+		
 		String[][][]toReturn=new String[x][y][z];
-		String[]unorganized=new String[x*y*z];
+		String[]unorganized=new String[x*y*z+1];
 		int a=0;
+		
+		
 		
 		//this loop will simply collect all the information and then immediately store it.
 		for(int i=0; i!=toReturn.length; i++){
@@ -83,6 +101,7 @@ public class NetworkServer {
 				for(int l=0; l!=toReturn[i][k].length;l++){
 					a++;
 					unorganized[a]=receive.readUTF();
+					System.out.println(unorganized[a]);
 				}
 			}
 		}
@@ -105,9 +124,16 @@ public class NetworkServer {
 			toReturn[xe][ye][ze]=unorganized[i];
 		}
 		
+		for(int i=0; i!=toReturn.length; i++){
+			for(int k=0; k!=toReturn[i].length;k++){
+				for(int l=0; l!=toReturn[i][k].length;l++){
+					System.out.println(toReturn[i][k][l]);
+				}
+			}
+		}
+		
 		return toReturn;
 	}
-	
 	/**
 	 * public void sendMessage - this method sends a specified message to the client.
 	 * @param toSend - the message to send.
@@ -135,16 +161,21 @@ public class NetworkServer {
 	 */
 	public void sendSuperArray(String[][][]toSend)throws IOException{
 		int fullLength=0;
-
+		int xr=0;
+		int yr=0;
+		int zr=0;
 		//this loop will read the size of the array. This is important, as the client needs to prepare for the volume of information we are sending.
 		for(int i=0; i!=toSend.length; i++){
 			for(int k=0; k!=toSend[i].length;k++){
 				for(int l=0; l!=toSend[i][k].length;l++){
 					fullLength++;
+					xr=i;
+					yr=k;
+					zr=l;
 				}
 			}
 		}
-		send.writeUTF("messagelength:"+fullLength);
+		send.writeUTF("messagelength:"+xr+":"+yr+":"+zr);
 		
 		//This loop will actually send each piece of information. However, it also adds an array ID string to each one of the messages.
 		//This is so that if the packets for some reason don't arrive in the proper order, the receiver can piece it back together.
@@ -156,6 +187,7 @@ public class NetworkServer {
 				}
 			}
 		}
+		send.writeUTF("weeeeeeeeeeee");
 	}
 	
 	/**
