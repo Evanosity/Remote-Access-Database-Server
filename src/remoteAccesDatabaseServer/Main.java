@@ -32,11 +32,12 @@ public class Main {
 	   //	db = new DatabaseAccess(location, username, password, portData, table);
 		
 		try {
-			doTheThing(db.select());
+			doTheThing(db.select(null));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 	
 	/**

@@ -56,7 +56,8 @@ public class DatabaseAccess {
 		
 	}
 	
-	public String[][][] select() {
+	public String[][][] select(String[][] arguments) {
+		//TODO - add infinite expansion on arguments (Cam)
 		int rows = count();
 		int currentColumn = 0;
 		String[][][] info = new String[0][rows][0];
@@ -85,6 +86,7 @@ public class DatabaseAccess {
 		}catch(Exception e) {
 			System.out.println(e);
 		}
+		
 	}
 	
 	public void insert() {
