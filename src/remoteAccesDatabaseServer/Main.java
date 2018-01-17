@@ -19,6 +19,21 @@ public class Main {
 	
 	public static void main(String[] args){
 		
+db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
+		
+		String info[][] = null;
+		if(db.select() != null) {
+			info = db.select();
+		}
+		for(int i  =0; i< info.length; i++) {
+			for(int f = 0; f < info[0].length; f++) {
+				System.out.print(info[i][f] + " ");
+			}
+			System.out.println();
+		}
+		
+		
+		/*
 		String[][][] toSend=new String[5][5][5];
 		
 		for(int i=0; i!=5; i++){
@@ -28,40 +43,55 @@ public class Main {
 				}
 			}
 		}
-		try{
+		*/
+		
+		
+		try {
 			ns=new NetworkServer(portNet);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 		
+		/*
+		
 		try {
-			ns.sendSuperArray(toSend);
+			ns.sendSuperArray();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		/**ss = new ServerSide();
+		*/
+		
+		ss = new ServerSide();
+		
+		
 		
 		try {
 			 ns = new NetworkServer(portNet);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 		// Doesn't contain correct variables 
-		db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_System");
+		db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
 				
 		//DatabaseAccess e=new DatabaseAccess("","","");
 		//e.closeDatabase();
 	   //	db = new DatabaseAccess(location, username, password, portData, table);
 		
+		
+		/*
 		try {
 			doTheThing(db.select());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
+		*/
+		
 
 	}
 	

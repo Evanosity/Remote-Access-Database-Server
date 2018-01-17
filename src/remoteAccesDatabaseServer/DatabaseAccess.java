@@ -56,62 +56,39 @@ public class DatabaseAccess {
 		
 	}
 	
-	public String[][][] select() {
+	public String[][] select() {
         System.out.println("Pulling");
         int rows = count();
+        int numOfColumns = columns();
+        System.out.println(rows);
+        System.out.println(numOfColumns);
         //int currentColumn = 1;
-        String[][][] info;
-        switch(useTable) {
-        case("SWDB_SYSTEM"):
-        	info = new String[12][rows][1];
-        	break;
-        case("SWD_COMPANY"):
-        	info = new String[12][rows][1];
-        	break;
-        case("SWDB_IVOICE"):
-        	info = new String[14][rows][1];
-        	break;
-        case("SWD_EXPENSE"):
-        	info = new String[14][rows][1];
-        	break;
-        default:
-        	info = new String[14][rows][1];
-        	break;
-        }
+        String[][] info = new String[rows][numOfColumns];
         
         try{ 
             
             //Execute SQL query
             ResultSet rs=stmt.executeQuery("select * from " + useTable);
-            //System.out.println("Executed Query");
             
             //Process Result Set
+            int count = 0;
             while(rs.next()) {
-            info[0][rows][0] = rs.getString(1);
-            info[1][rows][0] = rs.getString(2);
-            info[2][rows][0] = rs.getString(3);
-            info[3][rows][0] = rs.getString(4);
-            info[4][rows][0] = rs.getString(5);
-            info[5][rows][0] = rs.getString(6);
-            info[6][rows][0] = rs.getString(7);
-            info[7][rows][0] = rs.getString(8);
-            info[8][rows][0] = rs.getString(9);
-            info[9][rows][0] = rs.getString(10);
-            info[10][rows][0] = rs.getString(11);
-            info[11][rows][0] = rs.getString(12);
-            rows++;
+            	for(int f = 0; f < numOfColumns; f++) {
+        			info[count][f] = rs.getString(f + 1);
+        		}
+            	count++;
             }
             
             
-            con.close();  
+            //con.close();  
             }catch(Exception e){ System.out.println(e);}
-            
+         
         return info;
     }
 	
-	public void update() {
+	public void update(String[] returnInfo) {
 		try {
-			ResultSet rs = stmt.executeQuery("UPDATE swdb_invoice set invoice_no = 'INV-0003' where invoice_ID=9");
+			ResultSet rs = stmt.executeQuery("UPDATE " + useTable + " set " + columnName +" = '" + cellValue + "' where " + rowParameter + "=" + rowValue);
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -124,7 +101,7 @@ public class DatabaseAccess {
 					+ "( invoice_id, company_id, client_id, invoice_no, invoice_date, invoice_transaction_amount, invoice_paid_flag, invoice_desc,created_system_id, created_user, created_date, updated_system_id, updated_user, updated_date ) "
 			        + "VALUES ( null, 2, 3, 'INV-0004', TO_DATE('20171214','YYYYMMDD'), 1000, 'N', 'Test', 2, 'swdb_api_user', TO_DATE('20171214','YYYYMMDD'), 2, 'swdb_api_user', TO_DATE('20171214','YYYYMMDD') )");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 
 	}
@@ -143,7 +120,7 @@ public class DatabaseAccess {
 			con.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
 	}
 	/**
@@ -154,7 +131,7 @@ public class DatabaseAccess {
 			con.close();
 		}
 		catch(SQLException e){
-			e.printStackTrace();
+			System.out.println(e);
 		}
 	}
 	
@@ -162,12 +139,26 @@ public class DatabaseAccess {
 		int num = 0;
 		
 		try {
-			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM" + useTable);
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM " + useTable);
 			if(rs.next()) {
 				num = Integer.parseInt(rs.getString(1));
 			}
 		}catch(Exception e) {
-			System.out.println(e.getStackTrace());
+			System.out.println(e);
+		}
+		
+		return num;
+	}
+	
+	public int columns() {
+		int num = 0;
+		
+		try {
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM ALL_TAB_COLUMNS WHERE TABLE_NAME='" + useTable + "'");
+			if(rs.next())
+				num = Integer.parseInt(rs.getString(1));
+		}catch(Exception e) {
+			
 		}
 		
 		return num;
