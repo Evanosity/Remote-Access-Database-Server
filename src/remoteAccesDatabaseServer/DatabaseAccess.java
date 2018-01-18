@@ -21,6 +21,7 @@ public class DatabaseAccess {
 	private String uname;
 	private String host;
 	private int port;
+	private String columnNames[] = {};
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -88,7 +89,9 @@ public class DatabaseAccess {
 	
 	public void update(String[] returnInfo) {
 		try {
-			ResultSet rs = stmt.executeQuery("UPDATE " + useTable + " set " + columnName +" = '" + cellValue + "' where " + rowParameter + "=" + rowValue);
+			for(int i = 0; i < columnNames.length; i++) {
+				ResultSet rs = stmt.executeQuery("UPDATE " + useTable + " set " + columnNames[i] +" = '" + returnInfo[i] + "' where " + columnNames[0] + "=" + returnInfo[0]);
+			}
 		}catch(Exception e) {
 			System.out.println(e);
 		}
