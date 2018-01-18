@@ -21,7 +21,7 @@ public class DatabaseAccess {
 	private String uname;
 	private String host;
 	private int port;
-	private String columnNames[] = {};
+	private String columnNames[] = {"","","","","","","","","","","",""};
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -58,7 +58,6 @@ public class DatabaseAccess {
 	}
 	
 	public String[][] select() {
-        System.out.println("Pulling");
         int rows = count();
         int numOfColumns = columns();
         System.out.println(rows);
@@ -82,7 +81,7 @@ public class DatabaseAccess {
             
             
             //con.close();  
-            }catch(Exception e){ System.out.println(e);}
+            }catch(Exception e){ System.out.println("Here is the error");}
          
         return info;
     }

@@ -18,7 +18,16 @@ public class Main {
 	
 	
 	public static void main(String[] args){
-		db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
+		db = new DatabaseAccess("localho-t", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
+		
+
+		
+		try {
+			ns=new NetworkServer(portNet);
+		}
+		catch(Exception e) {
+			System.out.println("Could not connect");
+		}
 		
 		String info[][] = null;
 		if(db.select() != null) {
@@ -31,17 +40,22 @@ public class Main {
 			System.out.println();
 		}
 		
+		String[][]toSend=new String[][]{
+				{"1","2","3","4","5","6","7","8","9","10","12","11"},
+				{"1","1","1","1","1","1","1","1","1","1","1","1"}
+		};
+		
 		try {
-			ns=new NetworkServer(portNet);
-			ns.sendDoubleArray(info);
-			String[][]toSend=ns.receiveDoubleArray();
-			for(int i=0;i!=3;i++){
-				db.update(toSend[i]);
-			}
-		}
-		catch(Exception e){
+			ns.sendDoubleArray(toSend);
+			//String[][]toSend=ns.receiveDoubleArray();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//(int i=0;i!=3;i++){
+			//db.update(toSend[i]);
+		//}
 		
 		ss = new ServerSide();
 	}
