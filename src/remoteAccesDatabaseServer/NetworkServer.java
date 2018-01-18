@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException;
  * public class NetworkServer - this is the framework for networking, and it just has the very basic receive/send methods. These will be used
  * by other classes to effectively send and receive data.
  * @author Evanosity
- * @date December 11 2017
+ * @date January 17 2017
  */
 public class NetworkServer {
 	private ServerSocket serverSocket;
@@ -56,9 +56,15 @@ public class NetworkServer {
 		return receive.readUTF();
 	}
 	
-	public String[] receiveArray(int size) throws IOException{
-		String[] toReturn=new String[size];
-		for(int i=0; i!=size; i++){
+	/**
+	 * public String[] receiveArray - this method will receive a string array from the socket.
+	 * @return the received array
+	 * @throws IOException
+	 */
+	public String[] receiveArray()throws IOException{
+		String[]toReturn;
+		toReturn=new String[Integer.parseInt(receive.readUTF())];
+		for(int i=0;i!=toReturn.length;i++){
 			toReturn[i]=receive.readUTF();
 		}
 		return toReturn;
@@ -99,9 +105,10 @@ public class NetworkServer {
 	 * @throws IOException
 	 */
 	public void sendArray(String[] toSend)throws IOException{
-		send.writeUTF("messagelength:"+toSend.length);
+		String length=""+toSend.length;
+		send.writeUTF(length);
 		for(int i=0; i!=toSend.length; i++){
-			send.writeUTF("arrayID:"+i+":Message:"+toSend[i]);
+			send.writeUTF(toSend[i]);
 		}
 	}
 	
@@ -128,37 +135,5 @@ public class NetworkServer {
 	 */
 	public void shutdown()throws IOException{
 		server.close();
-	}
-	
-	/**
-	 * public int getPort - this method returns the port used by this server.
-	 * @return the specified port.
-	 */
-	public int getPort(){
-		return port;
-	}
-	
-	/**
-	 * public String getConnectionAddress - returns the IP address of the connected client.
-	 * @return the correct IP
-	 */
-	public String getConnectionAddress(){
-		return null;
-	}
-	
-	/**
-	 * private String[] extendArray - this is a method for enlarging an array if it becomes full.
-	 * @param toExtend
-	 * @return
-	 */
-	private String[] extendArray(String[]toExtend){
-		String[]extended;
-		
-		extended=new String[toExtend.length*2];
-		for(int i=0;i!=toExtend.length;){
-			extended[i]=toExtend[i];
-		}
-		
-		return extended;
 	}
 }
