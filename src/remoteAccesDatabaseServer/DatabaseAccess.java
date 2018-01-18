@@ -21,7 +21,7 @@ public class DatabaseAccess {
 	private String uname;
 	private String host;
 	private int port;
-	private String columnNames[] = {"","","","","","","","","","","",""};
+	private String columnNames[];
 	
 	/**
 	 * public DatabaseAccess - the main constructor for the database access.
@@ -88,7 +88,11 @@ public class DatabaseAccess {
 	
 	public void update(String[] returnInfo) {
 		try {
+			columnNames = getColumnNames();
 			for(int i = 0; i < columnNames.length; i++) {
+				if(returnInfo[i].equals("null")) {
+					returnInfo[i] = null;
+				}
 				ResultSet rs = stmt.executeQuery("UPDATE " + useTable + " set " + columnNames[i] +" = '" + returnInfo[i] + "' where " + columnNames[0] + "=" + returnInfo[0]);
 			}
 		}catch(Exception e) {
@@ -164,6 +168,21 @@ public class DatabaseAccess {
 		}
 		
 		return num;
+	}
+	
+	public String[] getColumnNames() {
+		String[] columnNames = new String[columns()];
+		int count = 0;
+		try {
+			ResultSet rs = stmt.executeQuery("SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME ='" + useTable +"' ORDER BY COLUMN_ID");
+			while(rs.next()) {
+				columnNames[count] = rs.getString(1);
+				count++;
+			}
+		}catch(Exception e) {
+			
+		}
+		return columnNames;
 	}
 	
 	public String[][][] extendArray3D(String[][][] toExtend, int val1, int val2, int val3){

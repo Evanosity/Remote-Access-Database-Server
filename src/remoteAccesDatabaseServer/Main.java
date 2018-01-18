@@ -18,9 +18,8 @@ public class Main {
 	
 	
 	public static void main(String[] args){
-		db = new DatabaseAccess("localho-t", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
-		
-
+		db = new DatabaseAccess("localhost", "SWDB_API_USER", "dean22", 1521, "SWDB_SYSTEM");
+		ss = new ServerSide();
 		
 		try {
 			ns=new NetworkServer(portNet);
@@ -36,6 +35,9 @@ public class Main {
 		for(int i  =0; i< info.length; i++) {
 			for(int f = 0; f < info[0].length; f++) {
 				System.out.print(info[i][f] + " ");
+				if(info[i][f] == (null)) {
+					info[i][f]="null";
+				}
 			}
 			System.out.println();
 		}
@@ -46,8 +48,14 @@ public class Main {
 		};
 		
 		try {
-			ns.sendDoubleArray(toSend);
-			//String[][]toSend=ns.receiveDoubleArray();
+			ns.sendDoubleArray(info);
+			String[][]toUpdate=ns.receiveDoubleArray();
+			for(int i=0;i!=toUpdate.length;i++) {
+				db.update(toUpdate[i]);
+				for(int f=0;f!=toUpdate[0].length;f++) {
+					System.out.println(toUpdate[i][f]);
+				}
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -57,7 +65,6 @@ public class Main {
 			//db.update(toSend[i]);
 		//}
 		
-		ss = new ServerSide();
 	}
 	
 	public void Shutdown() {
